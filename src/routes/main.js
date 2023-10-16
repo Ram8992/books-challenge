@@ -1,5 +1,8 @@
 const express = require('express');
 const mainController = require('../controllers/main');
+const loginValidation = require('../middlewares/loginValidation');
+const admMiddleware = require('../middlewares/admMiddleware');
+const logMiddleware = require('../middlewares/logMiddleware');
 
 const router = express.Router();
 
@@ -12,9 +15,10 @@ router.get('/authors/:id/books', mainController.authorBooks);
 router.get('/users/register', mainController.register);
 router.post('/users/register', mainController.processRegister);
 router.get('/users/login', mainController.login);
-router.post('/users/login', mainController.processLogin);
+router.post('/users/login', loginValidation, mainController.processLogin);
+//router.post('/users/logout', logMiddleware, mainController.logOut);
 router.delete('/books/:id', mainController.deleteBook);
-router.get('/books/edit/:id', mainController.edit);
+router.get('/books/edit/:id', admMiddleware, mainController.edit);
 router.put('/books/edit/:id', mainController.processEdit);
 
 module.exports = router;

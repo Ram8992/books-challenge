@@ -16,6 +16,9 @@ module.exports = (sequelize, dataTypes) => {
     },
     description: {
       type: dataTypes.STRING
+    },
+    state: {
+      type: dataTypes.BOOLEAN
     }
   };
   let config = {

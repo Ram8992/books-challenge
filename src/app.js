@@ -3,6 +3,16 @@ const mainRouter = require('./routes/main');
 
 const app = express();
 
+app.use(cookie())
+app.use(cookieExist)
+
+
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitealized: false
+}))
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

@@ -25,6 +25,17 @@
           </a>
         </div>
 
+        <ul>
+          <% authors.forEach(author => { %>
+              
+          <% authors.forEach(author => { %>
+              <
+      <li>
+                  <a href="/author/<%= author.id %>"><%= author.name %></a>
+              </li>
+          <% }); %>
+      </ul>
+
         <div class="feature col">
           <div class="feature-icon bg-gradient">
             <img class="d-block mx-auto mb-4" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Catcher-in-the-rye-red-cover.jpg" alt="" width="172" height="257">
@@ -37,9 +48,9 @@
         </div>
 
 
+      </div>
+    </div>
   </div>
-  </div>
-</div>
 
 
 <%- include('partials/footer.ejs') %>

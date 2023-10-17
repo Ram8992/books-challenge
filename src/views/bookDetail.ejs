@@ -23,7 +23,9 @@
 
             <% if (locals.isAdmin == true) { %>
             <a href="/books/edit/<%= book.id %>" class="btn btn-primary btn-lg px-4 gap-3">Edit</a>
-            <a href="/books/delete/<%= book.id %>" class="btn btn-outline-secondary btn-lg px-4">Delete</a>
+            <form method="POST" action="/books/<%= book.id %>?_method=DELETE">
+              <button class="btn btn-primary btn-lg px-4 gap-3" type="submit">BORRAR</button> 
+            </form>
             <% } %>
           </div>
         </div>

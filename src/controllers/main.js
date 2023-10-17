@@ -2,6 +2,7 @@ const bcryptjs = require('bcryptjs');
 const db = require('../database/models');
 const { Op, Model } = require("sequelize");
 const { use } = require('../routes/main');
+const { validationResult } = require('express-validator');
 
 const mainController = {
 
@@ -58,7 +59,7 @@ const mainController = {
   },
 
   deleteBook: async (req, res) => {
-    await db.Book.destroy(
+    await db.Book.update({Borrado: true},
       {
       where: {
           id: req.params.id,
@@ -112,14 +113,24 @@ const mainController = {
   },
 
   processLogin: (req, res) => {
-    // Implement login process
-    res.render('home');
+    const errors = validationResult(req)
+    console.log(errors)
+    if (!errors.isEmpty()) {
+      return res.render('login', { errors: errors.mapped() })
+    }
+    return res.redirect('/') 
   },
 
-  edit: async (req, res) => {
+  logOut: async (req, res) =>  {
+    req.session.destroy();
+    res.clearCookie('recordame')
+    return res.redirect('/')
+  },
+
+  edit: async(req, res) => {
     try {
       const bookId = req.params.id;
-      const book = await db.Book.findByPk(bookId, {
+      const book = await db.Book.findByPk(bookId,{where: {Borrado: false}}, {
         include: [{ association: 'authors' }]
       });
 

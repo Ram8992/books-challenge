@@ -1,5 +1,6 @@
 const express = require('express');
 const mainRouter = require('./routes/main');
+const methodOverride = require('method-override');
 const session = require('express-session');
 const cookie = require('cookie-parser');
 //const cookieExist = require('./middlewares/cookieMiddleware');
@@ -19,7 +20,7 @@ app.use(session({
 app.use(userLoggedMiddleware)
 
 //app.use(cookieExist)
-
+app.use(methodOverride('_method'));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

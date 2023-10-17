@@ -6,7 +6,7 @@ const sequelize = require("sequelize");
 
 module.exports = [
 
-    body('contrasenia').exists().notEmpty().withMessage('La contraseña no debe ser vacía'),
+    body('password').exists().notEmpty().withMessage('La contraseña no debe ser vacía'),
     body('email')
       .exists()
       .notEmpty()
@@ -14,13 +14,13 @@ module.exports = [
       .isEmail()
       .withMessage('Debe ser una dirección de correo válida')
       .custom(async (value, { req }) => {
-        const user = await db.User.findAll({ where: { email: value, erased: false }, raw: true })
+        const user = await db.User.findAll({ where: { email: value, Borrado: false }, raw: true })
           .then(usuarios => usuarios[0]);
         if (!user) {
           throw new Error('Email y/o clave incorrectos');
         }
-        if (await bcrypt.compare(req.body.contrasenia, user.password)) {
-          delete user.password;
+        if (await bcrypt.compare(req.body.password, user.Pass)) {
+          delete user.Pass;
           req.session.userLog = user;
           if (req.body.cookie) {
             // Utiliza el middleware de cookies para configurar la cookie.

@@ -1,7 +1,7 @@
 const admMiddleware = (req, res, next) => {
 
-    if (!req.session.userLog || req.session.userLog.Category.Id != 1) {
-        return res.redirect('/login')
+    if (!req.session.userLog || req.session.userLog.CategoryId != 1) {
+        return res.redirect('/users/login')
     } else {
         next();
     }

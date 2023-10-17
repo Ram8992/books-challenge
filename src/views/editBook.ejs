@@ -71,6 +71,11 @@
                 <% if (currentUser && currentUser.id_profile === 1) { %>
                 <button type="submit" class="btn btn-primary btn-lg">Edit</button>
               </div>
+              
+              <% if (locals.isAdmin == true) { %>
+                <a href="/books/edit/<%= book.id %>" class="btn btn-primary btn-lg px-4 gap-3">Edit</a>
+                <a href="/books/delete/<%= book.id %>" class="btn btn-outline-secondary btn-lg px-4">Delete</a>
+              <% } %>
   
             </div>
           </form>

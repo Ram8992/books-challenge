@@ -7,7 +7,7 @@ const mainController = {
 
   home: (req, res) => {
     db.Book.findAll({
-      where: { state: false },
+      where: { Borrado: false },
       include: [{ association: 'authors' }]
     })
       .then((books) => {
@@ -20,7 +20,7 @@ const mainController = {
     const bookId = req.params.id;
 
     db.Book.findByPk(bookId, {
-      where: { state: false, id: bookId },
+      where: { Borrado: false, id: bookId },
       include: [{ association: 'authors' }]
     })
       .then((book) => {
@@ -58,17 +58,13 @@ const mainController = {
   },
 
   deleteBook: async (req, res) => {
-    try {
-      await db.Book.update(
-        { erased: true },
-        { where: { id: req.params.id } }
-      );
-      return res.redirect('/');
-    } catch (error) {
-      // Manejo de errores, si es necesario
-      console.error(error);
-      return res.redirect('/');
-    }
+    await db.Book.destroy(
+      {
+      where: {
+          id: req.params.id,
+      }
+  });
+      return res.redirect('/')
   },
 
   authors: (req, res) => {
@@ -79,9 +75,17 @@ const mainController = {
       .catch((error) => console.log(error));
   },
 
-  authorBooks: (req, res) => {
-    // Implement books by author
-    res.render('authorBooks');
+  authorBooks:async (req, res) => {
+    try {
+      await db.Author.findByPk(req.params.id, {
+      include: [{ association: 'books' }]
+      }).then((author) => {
+      return res.render('authorBooks', { author: author });})
+    } catch (error) {
+      // Manejo de errores, si es necesario
+      console.error(error);
+      return res.redirect('/');
+    }
   },
 
   register: (req, res) => {

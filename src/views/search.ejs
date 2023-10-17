@@ -24,7 +24,18 @@
 
 
     <div class="list-group">
-      
+        <% if (books.length === 0) { %>
+          <h2>No se encontraron libros</h2>
+          <% } else { %>
+            <% books.forEach(function(book) { %>
+                      <div class="card">
+                        <div class="card-body">
+                          <img class="d-block mx-auto mb-4" src="<%= book.cover %>" alt="<%= book.title %>" width="172" height="257">
+                          <h5 class="card-title"><%= book.title %></h5>
+                          <p class="card-text"><%= book.description %></p>
+                        </div>
+                      </div>
+                    <% })}; %> 
     </div>
   </div>
 </div>

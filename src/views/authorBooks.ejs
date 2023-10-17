@@ -13,39 +13,23 @@
 
     <div class="container">
       <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+
+        <% if (author.books.length === 0) { %>
+<% } else { %>
+ <% author.books.forEach(function(book) { %>
+ <div class="feature col">
+          <div class="feature-icon bg-gradient">
+            <img class="d-block mx-auto mb-4" src="<%= book.cover %>" alt="" width="172" height="257">
+          </div>
+          <h2><%= book.title %></h2>
+          <p><%= book.description %>.</p>
+          <a href="#" class="icon-link">
+            Detail
+          </a>
+        </div>
+       <% })}; %> 
+
       
-        <div class="feature col">
-          <div class="feature-icon bg-gradient">
-            <img class="d-block mx-auto mb-4" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Catcher-in-the-rye-red-cover.jpg" alt="" width="172" height="257">
-          </div>
-          <h2>Book Title</h2>
-          <p>Book description.</p>
-          <a href="#" class="icon-link">
-            Detail
-          </a>
-        </div>
-
-        <ul>
-          <% authors.forEach(author => { %>
-              
-          <% authors.forEach(author => { %>
-              <
-      <li>
-                  <a href="/author/<%= author.id %>"><%= author.name %></a>
-              </li>
-          <% }); %>
-      </ul>
-
-        <div class="feature col">
-          <div class="feature-icon bg-gradient">
-            <img class="d-block mx-auto mb-4" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Catcher-in-the-rye-red-cover.jpg" alt="" width="172" height="257">
-          </div>
-          <h2>Book Title</h2>
-          <p>Book description.</p>
-          <a href="#" class="icon-link">
-            Detail
-          </a>
-        </div>
 
 
       </div>

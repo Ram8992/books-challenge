@@ -17,7 +17,7 @@ module.exports = (sequelize, dataTypes) => {
     description: {
       type: dataTypes.STRING
     },
-    state: {
+    Borrado: {
       type: dataTypes.BOOLEAN
     }
   };
